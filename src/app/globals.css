@@ -1,0 +1,308 @@
+@import "tailwindcss";
+
+/* Tailwind v4 — class-based dark mode (next-themes adds `class="dark"` on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Brand Colors - Al-Ghazzawi Academy */
+  --color-navy: #0a0e27;
+  --color-navy-50: #f4f5fa;
+  --color-navy-100: #e6e9f5;
+  --color-navy-200: #c5cbe5;
+  --color-navy-300: #8e98c4;
+  --color-navy-400: #5764a0;
+  --color-navy-500: #313e7b;
+  --color-navy-600: #1f2a5f;
+  --color-navy-700: #131c44;
+  --color-navy-800: #0a0e27;
+  --color-navy-900: #06091a;
+  --color-navy-950: #03050f;
+
+  --color-royal: #1e40af;
+  --color-royal-50: #eff4ff;
+  --color-royal-100: #dbe6fe;
+  --color-royal-200: #bfd2fe;
+  --color-royal-300: #93b4fd;
+  --color-royal-400: #6088fa;
+  --color-royal-500: #3a60f5;
+  --color-royal-600: #2546ea;
+  --color-royal-700: #1e40af;
+  --color-royal-800: #1e3a8a;
+  --color-royal-900: #1e3a72;
+
+  --color-cyan-brand: #06b6d4;
+  --color-cyan-50: #ecfeff;
+  --color-cyan-100: #cffafe;
+  --color-cyan-200: #a5f3fc;
+  --color-cyan-300: #67e8f9;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+  --color-cyan-700: #0e7490;
+
+  --color-gold: #d97706;
+  --color-charcoal: #18181b;
+  --color-offwhite: #fafafa;
+
+  /* Semantic tokens */
+  --color-background: var(--color-offwhite);
+  --color-foreground: var(--color-charcoal);
+  --color-primary: var(--color-navy);
+  --color-secondary: var(--color-royal-700);
+  --color-accent: var(--color-cyan-brand);
+  --color-muted: #71717a;
+  --color-border: #e4e4e7;
+  --color-card: #ffffff;
+
+  /* Fonts */
+  --font-sans: var(--font-tajawal), var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-tajawal), var(--font-inter), system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Custom shadows */
+  --shadow-glow: 0 0 40px -10px rgba(6, 182, 212, 0.5);
+  --shadow-soft: 0 2px 8px rgba(10, 14, 39, 0.06);
+  --shadow-card: 0 4px 20px -8px rgba(10, 14, 39, 0.08);
+}
+
+/* Dark theme — applied when next-themes sets <html class="dark"> */
+html.dark {
+  --color-background: #09090b;
+  --color-foreground: #fafafa;
+  --color-card: #18181b;
+  --color-border: #27272a;
+  --color-muted: #a1a1aa;
+  --prose-heading: #67e8f9;
+  --prose-h4: #93b4fd;
+  --prose-strong: #ecfeff;
+  --prose-keypoint-bg: linear-gradient(to left, rgba(6, 182, 212, 0.14), rgba(6, 182, 212, 0.06));
+  --prose-keypoint-text: #ecfeff;
+  --prose-th-bg: rgba(255, 255, 255, 0.06);
+  --prose-th-text: #ecfeff;
+  color-scheme: dark;
+}
+
+html:not(.dark) {
+  color-scheme: light;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "kern", "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* RTL-aware text balance for headings */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* Smooth gradient utility */
+.gradient-radial-hero {
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgba(6, 182, 212, 0.15),
+    transparent
+  );
+}
+
+.gradient-mesh {
+  background-image:
+    radial-gradient(at 0% 0%, rgba(30, 64, 175, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(10, 14, 39, 0.08) 0px, transparent 50%);
+}
+
+/* Animated gradient border */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(6, 182, 212, 0.4),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Subtle float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Summary prose — for HTML content rendered with dangerouslySetInnerHTML */
+:root {
+  --prose-heading: #0a0e27;
+  --prose-h4: #1e40af;
+  --prose-strong: #0a0e27;
+  --prose-keypoint-bg: linear-gradient(to left, rgba(6, 182, 212, 0.06), rgba(6, 182, 212, 0.02));
+  --prose-keypoint-text: #0a0e27;
+  --prose-th-bg: #f4f5fa;
+  --prose-th-text: #0a0e27;
+}
+
+.summary-prose {
+  color: var(--color-foreground);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+}
+.summary-prose h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--prose-heading);
+  margin-top: 2.25rem;
+  margin-bottom: 0.875rem;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 6rem;
+}
+.summary-prose h3:first-child {
+  margin-top: 0;
+}
+.summary-prose h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--prose-h4);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.summary-prose p {
+  margin: 0.875rem 0;
+}
+.summary-prose ul, .summary-prose ol {
+  margin: 0.875rem 0;
+  padding-inline-start: 1.5rem;
+}
+.summary-prose ul { list-style: disc; }
+.summary-prose ol { list-style: decimal; }
+.summary-prose li {
+  margin: 0.5rem 0;
+}
+.summary-prose strong {
+  color: var(--prose-strong);
+  font-weight: 700;
+}
+.summary-prose .key-point {
+  margin: 1.25rem 0;
+  padding: 1rem 1.125rem;
+  border-inline-start: 4px solid var(--color-cyan-brand);
+  background: var(--prose-keypoint-bg);
+  border-radius: 0.625rem;
+  font-weight: 500;
+  color: var(--prose-keypoint-text);
+}
+.summary-prose .key-point strong {
+  color: var(--prose-keypoint-text);
+}
+.summary-prose table {
+  width: 100%;
+  margin: 1.25rem 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.summary-prose th, .summary-prose td {
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--color-border);
+  text-align: start;
+}
+.summary-prose th {
+  background: var(--prose-th-bg);
+  font-weight: 700;
+  color: var(--prose-th-text);
+}
+
+/* ──────────────────────────────────────────────
+   Print styles
+   Apply across summary/notes/certificate pages.
+   ────────────────────────────────────────────── */
+@media print {
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .summary-prose, .summary-prose * {
+    color: #000 !important;
+    background: transparent !important;
+  }
+  .summary-prose .key-point {
+    border: 1px solid #999;
+    background: #f6f6f6 !important;
+    color: #000 !important;
+  }
+  /* Hide all interactive chrome */
+  header, footer, nav,
+  button:not(.print-keep),
+  .print-hidden {
+    display: none !important;
+  }
+  /* Avoid awkward page breaks */
+  h1, h2, h3, h4 {
+    break-after: avoid;
+  }
+  p, li, blockquote {
+    break-inside: avoid;
+  }
+  /* Certificate sizing */
+  .certificate-paper {
+    box-shadow: none !important;
+    border: none !important;
+    width: 100%;
+    max-width: none;
+    min-height: 95vh;
+  }
+}
